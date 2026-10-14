@@ -17,7 +17,8 @@ try {
   execSync('git add -A', { cwd: distDir, stdio: 'inherit' });
   execSync('git commit -m "Deploy to GitHub Pages"', { cwd: distDir, stdio: 'inherit' });
   execSync('git branch -M gh-pages', { cwd: distDir, stdio: 'inherit' });
-  execSync('git remote add origin https://github.com/mahasrikuppusamy-eng/nihongo.git', { cwd: distDir, stdio: 'inherit' });
+  const repoUrl = process.env.REPO_URL || 'https://github.com/mahasrikuppusamy-eng/japanese.git';
+  execSync(`git remote add origin ${repoUrl}`, { cwd: distDir, stdio: 'inherit' });
   execSync('git push -f origin gh-pages', { cwd: distDir, stdio: 'inherit' });
   console.log('✅ Successfully deployed to gh-pages branch!');
 } finally {
